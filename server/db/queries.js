@@ -1,8 +1,17 @@
 const knex = require('./knex');
 module.exports = {
-  getAll() {
-    return knex('food');
+  /* eslint-disable */
+  getAll(query) {
+    const knexQuery = knex('food');
+    if(query.title){
+      knexQuery.where('title', 'like', `%${query.title}%`);
+    }
+    if(query.description) {
+      knexQuery.where('description', 'like', `%${query.description}%`);
+    }
+    return knexQuery;
   },
+  /* eslint-enable */
   getOne(id) {
     return knex('food').where('id', id).first();
   },

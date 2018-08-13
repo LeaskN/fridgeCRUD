@@ -15,7 +15,8 @@ function validFood(food){
 }
 
 router.get('/', (req, res) => {
-  queries.getAll().then(foods => {
+  const { title, description } = req.query;
+  queries.getAll({ title, description }).then(foods => {
     res.json(foods);
   });
 });
